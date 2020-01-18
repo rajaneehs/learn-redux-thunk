@@ -1,0 +1,14 @@
+Why do we need the Thunk Middleware?
+
+=It intercepts every action object before it reaches a reducer. The middleware ensures that the asynchronously-retrieved data will be added to the redux store accordingly.
+
+=Async actions are difficult to deal with because we have less control over the order in which actions get dispatched. Adding Redux Thunk allows us to fire everything in order that we want because it's able to stop everything until the request or fetch call is resolved.
+
+=Reducers must be pure functions, which means that web requests can’t be made from inside of them.
+
+=Actions must be plain JavaScript objects. Redux will error out if an action creator returns something other than a JS object (i.e. a Promise, function, or undefined)
+
+With Redux Thunk, actions no longer have to follow the strict rule of returning JavaScript objects. Action creators can return functions and these functions have access to certain parameters, including dispatch and getState. Because of this, action creators can dispatch multiple actions within itself and an action can be calibrated to be dispatched only after an asynchronous call has been resolved. Redux Thunk gives us the ability to fire actions in a specific order and thus, gives us a way of handling asynchronous actions in Redux.
+
+Set up the middleware Thunk within redux/store.js. When we use any middleware, we need to specify it when creating the Redux store. The method createStore will take in applyMiddleware as its second argument. We’ll also make use of a Redux method called compose to set up an advanced store. An advanced store setup is necessary when you want to combine multiple middleware (for ex. Redux Thunk and Redux developer tools)
+
